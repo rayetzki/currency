@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import SimpleTable from './components/Table';
+import DatePicker from './components/DatePicker';
+import Chart from './components/Chart';
 
 class App extends Component {
+  
+  state = { 
+    date: '2019-04-18'
+  }
+  
+  handleDate = (e) => {
+    this.setState({ date: e.target.value })
+  }
+  
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Курс валют в Украине</h1>
+        <DatePicker onHandleDate={this.handleDate.bind(this)} date={this.state.date} />
+        <SimpleTable date={this.state.date} />
+        <h1>График изменения курса валют с 1996 года</h1>
+        <Chart />
       </div>
     );
   }
