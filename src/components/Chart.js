@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
-import { chartObject } from '../chart.js'
+import * as chartData from '../data.js';
 
 export default class Chart extends PureComponent {
   render() {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(chartData, "text/xml");
     return (
       <LineChart
         width={1200}
         height={500}
-        data={chartObject}
+        data={xmlDoc}
         margin={{
           top: 5, right: 30, left: 120, bottom: 5,
         }}

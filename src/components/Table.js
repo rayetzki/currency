@@ -6,8 +6,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { chartData, chartObject } from '../chart.js';
-import moment from 'moment'
+import { parseFromString } from 'react-xml-parser';
+import * as chartData from '../data.js';
+import moment from 'moment';
+
+console.log(new DOMParser(chartData, 'text/xml'))
 
 const styles = theme => ({
     root: {
@@ -29,7 +32,7 @@ function createData(name, buy, sell) {
 function SimpleTable ({ date, classes }) { 
   
   const formattedDate = moment(date).format('MM/DD/YYYY')
-  const data = chartObject.find(found => found.date === formattedDate)
+  const data = parseFromString(chartData).find(found => found.date === formattedDate)
   const isEarly = formattedDate < moment().format('MM/DD/YYYY')
   
   let rows
